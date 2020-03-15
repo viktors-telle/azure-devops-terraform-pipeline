@@ -1,0 +1,21 @@
+pool: your-agent-pool-name
+
+trigger:
+  batch: true
+  branches:
+    exclude:
+      - refs/heads/feature*
+
+resources:
+  repositories:
+    - repository: azure-devops-terraform-pipeline-template
+      type: github
+      name: viktors-telle/azure-devops-terraform-pipeline-template
+      ref: "refs/heads/master"
+
+stages:
+  - template: main.yml@viktors-telle/azure-devops-terraform-pipeline-template
+    parameters:
+      container_name: blob_container_name
+      container_key: blob_file_name
+      variable_group_name: project_variable_group_name
